@@ -1,0 +1,1 @@
+Exercises for part 6 of Fullstack 2019 MOOC
