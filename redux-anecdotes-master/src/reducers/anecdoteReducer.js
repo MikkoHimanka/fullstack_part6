@@ -19,6 +19,13 @@ const asObject = (anecdote) => {
 
 const initialState = anecdotesAtStart.map(asObject)
 
+export const submitNew = (content) => {
+	return {
+		type: 'SUBMIT',
+		data: asObject(content)
+	}
+}
+
 export const voteFor = (id) => {
 	return {
 		type: 'VOTE',
@@ -36,6 +43,9 @@ const reducer = (state = initialState, action) => {
 			  votes: objectToChange.votes + 1
 		  }
 		  return state.map(object => object.id !== id ? object : changedObject)
+	  case 'SUBMIT':
+		  return [...state, action.data]
+
 	  default: return state
   }
 }

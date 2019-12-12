@@ -1,5 +1,6 @@
 import React from 'react';
 import { voteFor } from './reducers/anecdoteReducer'
+import AnecdoteForm from './components/AnecdoteForm'
 
 const App = (props) => {
   const anecdotes = props.store.getState()
@@ -7,6 +8,7 @@ const App = (props) => {
   const vote = (id) => {
     props.store.dispatch(voteFor(id))
   }
+
 
   return (
     <div>
@@ -23,10 +25,7 @@ const App = (props) => {
         </div>
       )}
       <h2>create new</h2>
-      <form>
-        <div><input /></div>
-        <button>create</button>
-      </form>
+      <AnecdoteForm store={props.store} />
     </div>
   )
 }
