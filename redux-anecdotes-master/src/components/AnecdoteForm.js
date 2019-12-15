@@ -1,14 +1,19 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { submitNew } from '../reducers/anecdoteReducer'
-import { showNotificationWithTimeout } from '../reducers/notificationReducer'
+import { showNotification, hideNotification } from '../reducers/notificationReducer'
 
 const AnecdoteForm = (props) => {
 	const submit = (event) => {
 		event.preventDefault()
 		const content = event.target.anecdote.value
 		event.target.anecdote.value = ''
-		props.store.dispatch(submitNew(content))
-		showNotificationWithTimeout(props.store.dispatch, `${content} added`)
+		props.submitNew(content)
+		props.showNotification(`${content} added`)
+		const id = props.notification.id
+		setTimeout(() => {
+			props.hideNotification(id)
+		}, 5000)
 	  }
 
 	return (
@@ -22,4 +27,16 @@ const AnecdoteForm = (props) => {
 	)
 }
 
-export default AnecdoteForm
+const mapStateToProps = (state) => {
+	return {
+		notification: state.notification
+	}
+}
+
+const mapDispatchToProps = {
+	submitNew, showNotification, hideNotification
+}
+
+const ConnectedAnecdoteForm = connect(mapStateToProps, mapDispatchToProps)(AnecdoteForm)
+
+export default ConnectedAnecdoteForm

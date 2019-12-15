@@ -7,11 +7,12 @@ import Filter from './components/Filter'
 const App = (props) => {
   return (
     <div>
+
     	<h2>Anecdotes</h2>
-		{/* <Notification />*/}
-		{/* <Filter /> */}
+		<Notification />
+		<Filter />
 		<AnecdoteList />
-    	{/* <AnecdoteForm /> */}
+    	<AnecdoteForm />
     </div>
   )
 }
