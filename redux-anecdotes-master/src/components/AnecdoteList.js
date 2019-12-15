@@ -3,7 +3,9 @@ import { voteFor  } from '../reducers/anecdoteReducer'
 import { showNotificationWithTimeout } from '../reducers/notificationReducer'
 
 const AnecdoteList = (props) => {
+	const filter = props.store.getState().filter
 	const anecdotes = props.store.getState().anecdotes
+		.filter(object => object.content.toLowerCase().includes(filter.toLowerCase()))
 	
 	const vote = (anecdote) => {
 		showNotificationWithTimeout(props.store.dispatch, `you voted ${anecdote.content}`)
