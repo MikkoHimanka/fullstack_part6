@@ -1,5 +1,4 @@
 import React from 'react'
-import { notificationChange } from '../reducers/notificationReducer'
 
 const Notification = (props) => {
   const style = {
@@ -8,18 +7,12 @@ const Notification = (props) => {
     borderWidth: 1
   }
 
-  let timeout
-
   const notification = props.store.getState().notification
 
-  if (notification !== ''){
-	  clearTimeout(timeout)
-	  timeout = setTimeout(() => {
-		props.store.dispatch(notificationChange(''))
-	  }, 5000)
-	  return (
+if (notification.text !== ''){
+	return (
     	<div style={style}>
-      	{notification}
+      	{notification.text}
     	</div>
 	  )
   } else {

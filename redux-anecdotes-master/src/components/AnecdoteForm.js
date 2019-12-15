@@ -1,6 +1,6 @@
 import React from 'react'
 import { submitNew } from '../reducers/anecdoteReducer'
-import { notificationChange } from '../reducers/notificationReducer'
+import { showNotificationWithTimeout } from '../reducers/notificationReducer'
 
 const AnecdoteForm = (props) => {
 	const submit = (event) => {
@@ -8,7 +8,7 @@ const AnecdoteForm = (props) => {
 		const content = event.target.anecdote.value
 		event.target.anecdote.value = ''
 		props.store.dispatch(submitNew(content))
-		props.store.dispatch(notificationChange(`${content} added`))
+		showNotificationWithTimeout(props.store.dispatch, `${content} added`)
 	  }
 
 	return (
