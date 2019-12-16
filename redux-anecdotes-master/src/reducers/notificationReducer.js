@@ -1,24 +1,23 @@
-const notificationReducer = (state = { text: '', id: 0 }, action) => {
+const notificationReducer = (state = { text: '' }, action) => {
 	switch (action.type) {
 		case ('SHOW_NOTIFICATION'):
-			return { text: action.notification, id: action.id }
+			return { text: action.notification }
 		case ('HIDE_NOTIFICATION'):
-			if ( action.id === state.id -1 ) {
-				return { text: '', id: state.id }
-			} else return state
+			return { text: '' }
 		default: return state
 	}	
 }
 
-let nextNotificationId = 1
-export const showNotification = (notification) => {
-	const id = nextNotificationId++
-	return { type: 'SHOW_NOTIFICATION', id, notification }
-}
-
-export const hideNotification = (id) => {
-	return { 
-		type: 'HIDE_NOTIFICATION', id
+export const setNotification = (content, time) => {
+	return async dispatch => {
+		dispatch({
+			type: 'SHOW_NOTIFICATION', notification: content
+		})
+		setTimeout(() => {
+			dispatch({
+				type: 'HIDE_NOTIFICATION'
+			})
+		}, 1000*time);
 	}
 }
 
