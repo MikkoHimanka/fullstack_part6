@@ -12,6 +12,13 @@ export const voteFor = (id) => {
 	}
 }
 
+export const initializeAnecdotes = (anecdotes) => {
+	return {
+		type: 'INIT_DOTES',
+		data: anecdotes
+	}
+}
+
 const anecdoteReducer = (state = [], action) => {
   switch (action.type) {
 	  case 'VOTE':
@@ -24,6 +31,8 @@ const anecdoteReducer = (state = [], action) => {
 		  return state.map(object => object.id !== id ? object : changedObject)
 	  case 'SUBMIT':
 		  return [...state, action.data]
+	  case 'INIT_DOTES':
+		  return action.data
 
 	  default: return state
   }
