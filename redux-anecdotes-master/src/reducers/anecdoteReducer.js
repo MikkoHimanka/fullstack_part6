@@ -11,9 +11,12 @@ export const submitNew = content => {
 }
 
 export const voteFor = (id) => {
-	return {
-		type: 'VOTE',
-		data: { id }
+	return async dispatch => {
+		await anecdoteService.vote(id)
+		dispatch({
+			type: 'VOTE',
+			data: { id }
+		})
 	}
 }
 

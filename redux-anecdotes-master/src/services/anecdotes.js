@@ -13,4 +13,12 @@ const createNew = async content => {
 	return response.data
 }
 
-export default { getAll, createNew }
+const vote = async (id) => {
+	const request = await axios.get(`${baseUrl}/${id}`)
+	const objectToChange = request.data
+	const changedObject = {...objectToChange, votes: objectToChange.votes + 1}
+	const response = await axios.put(`${baseUrl}/${id}`, changedObject)
+	return response.data
+}
+
+export default { getAll, createNew, vote }
