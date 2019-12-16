@@ -1,7 +1,12 @@
-export const submitNew = (anecdote) => {
-	return {
-		type: 'SUBMIT',
-		data: anecdote
+import anecdoteService from '../services/anecdotes'
+
+export const submitNew = content => {
+	return async dispatch => {
+		const anecdote = await anecdoteService.createNew(content)
+		dispatch({
+			type: 'SUBMIT',
+			data: anecdote
+		})
 	}
 }
 
@@ -12,10 +17,13 @@ export const voteFor = (id) => {
 	}
 }
 
-export const initializeAnecdotes = (anecdotes) => {
-	return {
-		type: 'INIT_DOTES',
-		data: anecdotes
+export const initializeAnecdotes = () => {
+	return async dispatch => {
+		const anecdotes = await anecdoteService.getAll()
+		dispatch({
+			type: 'INIT_DOTES',
+			data: anecdotes
+		})
 	}
 }
 
